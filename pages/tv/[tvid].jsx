@@ -75,7 +75,7 @@ function tvidPage({ data, tvid }) {
              {data.seasons
               .map((item, index) => {
                 return (
-                  <Link href={`/tv/season/${item.season_number}?id=${data.id}`} key={index}>
+                  <Link href={`/tv/season/${item.season_number}?id=${data.id}&sl=${data.number_of_seasons}`} key={index}>
                     <SeasonCards data={item} index={item.id} />
                   </Link>
                   )
