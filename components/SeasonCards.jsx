@@ -3,7 +3,7 @@ import { Icon } from "@chakra-ui/icons";
 import { AiFillStar } from "react-icons/ai";
 import { Image, Shimmer } from "react-shimmer";
 
-function MovieCards(props) {
+function SeasonCards(props) {
   let { data, index } = props;
   return (
     <div key={index} className="pt-8 flex max-w-[200px]">
@@ -18,23 +18,16 @@ function MovieCards(props) {
         <Image
           NativeImgProps={{ className: "hover:brightness-75" }}
           src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
-          alt={data.title}
+          alt={data.name}
           fallback={<Shimmer width={200} height={233} />}
           fadeIn={true}
         />
-        <div className="text-white text-xs p-2">
-          <p className="font-semibold">{data.title}</p>
-          <div className="flex justify-between pt-1">
-            <p>{data.release_date}&nbsp;</p>
-            <p>
-            <Icon className="mr-1" as={AiFillStar}></Icon>
-              {Number(data.vote_average).toFixed(1)}
-            </p>
-          </div>
+        <div className="text-white text-sm p-2">
+          <p className="font-semibold text-center">{data.name}</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default MovieCards;
+export default SeasonCards;

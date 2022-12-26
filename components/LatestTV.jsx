@@ -20,12 +20,12 @@ function LatestTV({data}) {
 
       <div className="flex flex-wrap gap-8 px-6">
         {data && data
-          ? data.result
-              .filter((item, idx) => idx < 20)
+          ? data
+              .filter((item, idx) => idx < 10)
               .map((data, index) => {
                 return (
-                  <Link href={`/${data.tv_id}`}>
-                    <TVCards data={data} index={data.tv_id} />
+                  <Link href={`/tv/${data.id}`}>
+                    <TVCards data={data} index={data.id} />
                   </Link>
                 );
               })

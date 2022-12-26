@@ -18,12 +18,12 @@ function Trending({data}) {
 
       <div className="flex flex-wrap gap-8 px-6">
         {data && data
-          ? data.result
-              .filter((item, idx) => idx < 20)
+          ? data
+              .filter((item, idx) => idx < 10)
               .map((data, index) => {
                 return (
-                  <Link href={`/${data.movie_id}`}>
-                    <MovieCards data={data} index={data.movie_id} />
+                  <Link href={`/movie/${data.id}`}>
+                    <MovieCards data={data} index={data.id} />
                   </Link>
                 );
               })

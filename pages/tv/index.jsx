@@ -6,11 +6,13 @@ import TVCards from "../../components/TVCards";
 import Header from "../../components/Header";
 
 export async function getServerSideProps(context) {
-  const req = await fetch(`https://cinehub-v2-backend.vercel.app/api/tv/popular?page=`)
-  const res = await req.json()
+  const req = await fetch(
+    `https://api.themoviedb.org/3/trending/tv/day?api_key=4c1c4651b470f738873f80310325d848`
+  );
+  const res = await req.json();
   return {
-    props: { data: res }, // will be passed to the page component as props
-  }
+    props: { data: res.results }, // will be passed to the page component as props
+  };
 }
 
 function TV({ data }) {
@@ -20,10 +22,10 @@ function TV({ data }) {
       <div className="px-40 py-8 bg-[#181B22]">
         <div className="flex flex-wrap gap-8 px-6">
           {data && data
-            ? data.result.filter((item, idx) => idx < 30).map((data, index) => {
+            ? data.map((data, index) => {
                 return (
-                  <Link href={`/${data.tv_id}`}>
-                    <TVCards data={data} index={data.tv_id} />
+                  <Link href={`/tv/${data.id}`}>
+                    <TVCards data={data} index={data.id} />
                   </Link>
                 );
               })
@@ -34,4 +36,4 @@ function TV({ data }) {
   );
 }
 
-export default TV
+export default TV;
