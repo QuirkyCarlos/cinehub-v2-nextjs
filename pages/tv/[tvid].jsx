@@ -20,20 +20,6 @@ export async function getServerSideProps(context) {
 
 function tvidPage({ data, tvid }) {
 
-  // let seasonData = [];
-
-  // const unique = [
-  //   ...new Set(data?.result.episodes.map((item) => item.season)),
-  // ];
-  // const seasonArr = unique.map((element) => {
-  //   const filteredSeason = data?.result.episodes.filter(
-  //     (item) => item["season"] == element
-  //   );
-  //   seasonData.push(filteredSeason);
-  // });
-
-  // let first_ep = data?.result.episodes[0].id;
-
   return (
     <>
       <Header />
@@ -54,7 +40,7 @@ function tvidPage({ data, tvid }) {
             <div className="flex space-x-2 mt-4">
               {data.genres.map((item, index) => {
                 return (
-                  <Link href={"/"}>
+                  <Link href={"/"} key={index}>
                     <div className="p-2 text-white text-xs bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
                       {item.name}
                     </div>
@@ -72,7 +58,7 @@ function tvidPage({ data, tvid }) {
               <span>|</span>
               <span>{data.first_air_date}</span>
             </div>
-            <Link className="self-start" href={"/"}>
+            <Link className="self-start" href={`/tv/season/1?id=${data.id}`}>
               <div className="pt-3 pb-3 pr-8 pl-8 mt-4 text-white text-lg bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
                 <Icon className="mr-3" as={FaPlay}></Icon>Play
               </div>
@@ -89,7 +75,7 @@ function tvidPage({ data, tvid }) {
              {data.seasons
               .map((item, index) => {
                 return (
-                  <Link href={`/tv/${data.id}?s=${item.id}`}>
+                  <Link href={`/tv/season/${item.season_number}?id=${data.id}`} key={index}>
                     <SeasonCards data={item} index={item.id} />
                   </Link>
                   )
@@ -125,7 +111,7 @@ function tvidPage({ data, tvid }) {
               .filter((item, idx) => idx < 5)
               .map((item, index) => {
                 return (
-                  <Link href={`/tv/${item.id}`}>
+                  <Link href={`/tv/${item.id}`} key={index}>
                     <TVCards data={item} index={item.id} />
                   </Link>
                 );

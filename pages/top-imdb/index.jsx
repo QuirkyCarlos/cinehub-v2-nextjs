@@ -46,7 +46,7 @@ function TopIMDB({ movieTopData, tvTopData }) {
                 {movieTopData && movieTopData
                   ? movieTopData.result.filter((item, idx) => idx < 30).map((data, index) => {
                       return (
-                        <Link href={`/${data.movie_id}`}>
+                        <Link href={`/${data.movie_id}`} key={index}>
                           <MovieCards data={data} index={data.movie_id} />
                         </Link>
                       );
@@ -59,7 +59,7 @@ function TopIMDB({ movieTopData, tvTopData }) {
                 {tvTopData && tvTopData
                   ? tvTopData.result.filter((item, idx) => idx < 30).map((data, index) => {
                       return (
-                        <Link href={`/${data.tv_id}`}>
+                        <Link href={`/${data.tv_id}`} key={index}>
                           <TVCards data={data} index={data.tv_id} />
                         </Link>
                       );

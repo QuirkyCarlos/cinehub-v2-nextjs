@@ -26,7 +26,7 @@ function Movies({ data }) {
                 // .filter((item, idx) => idx < 30)
                 .map((data, index) => {
                   return (
-                    <Link href={`/movie/${data.id}`}>
+                    <Link href={`/movie/${data.id}`} key={index}>
                       <MovieCards data={data} index={data.id} />
                     </Link>
                   );

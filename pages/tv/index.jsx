@@ -24,7 +24,7 @@ function TV({ data }) {
           {data && data
             ? data.map((data, index) => {
                 return (
-                  <Link href={`/tv/${data.id}`}>
+                  <Link href={`/tv/${data.id}`} key={index}>
                     <TVCards data={data} index={data.id} />
                   </Link>
                 );

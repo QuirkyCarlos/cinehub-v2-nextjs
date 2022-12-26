@@ -7,11 +7,11 @@ import TVSearchCard from "../../components/Search/TVSearchCard";
 export async function getServerSideProps(context) {
   let { searchid } = context.params;
   const req = await fetch(
-    `https://cinehub-v2-backend.vercel.app/api/search?q=${searchid}`
+    `https://api.themoviedb.org/3/search/multi?api_key=4c1c4651b470f738873f80310325d848&language=en-US&page=1&query=${searchid}`
   );
   const res = await req.json();
   return {
-    props: { data: res }, // will be passed to the page component as props
+    props: { data: res.results }, // will be passed to the page component as props
   };
 }
 
@@ -29,17 +29,17 @@ function SearchPage(props) {
         </div> */}
         <div className="flex flex-wrap gap-8 px-6">
           {data && data
-            ? data.result.results.map((item, index) => {
-                if (item.type == 'Movie') {
+            ? data.map((item, index) => {
+                if (item.media_type == 'movie') {
                     return (
-                        <Link href={`/${item.id}`}>
+                        <Link href={`/movie/${item.id}`} key={index}>
                         <MovieSearchCard data={item} index={item.id} />
                       </Link>
                     )
                 }
                 else {
                     return (
-                        <Link href={`/${item.id}`}>
+                        <Link href={`/tv/${item.id}`} key={index}>
                         <TVSearchCard data={item} index={item.id} />
                       </Link>
                     )

@@ -56,7 +56,7 @@ function movieidPage({ data, movieid, streamData }) {
               {data.genres.map((item, index) => {
                 return (
                   <Link href={"/"}>
-                    <div className="p-2 text-white text-xs bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
+                    <div key={index} className="p-2 text-white text-xs bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
                       {item.name}
                     </div>
                   </Link>
@@ -73,7 +73,7 @@ function movieidPage({ data, movieid, streamData }) {
               <span>|</span>
               <span>{data.release_date}</span>
             </div>
-            <Link className="self-start" href={"/"}>
+            <Link className="self-start" href={`/play/movie/${movieid}`}>
               <div className="pt-3 pb-3 pr-8 pl-8 mt-4 text-white text-lg bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
                 <Icon className="mr-3" as={FaPlay}></Icon>Play
               </div>
@@ -113,7 +113,7 @@ function movieidPage({ data, movieid, streamData }) {
               .filter((item, idx) => idx < 5)
               .map((item, index) => {
                 return (
-                  <Link href={`/movie/${item.id}`}>
+                  <Link href={`/movie/${item.id}`} key={index}>
                     <MovieCards data={item} index={item.id} />
                   </Link>
                 );
