@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Header from "../../../components/Header";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

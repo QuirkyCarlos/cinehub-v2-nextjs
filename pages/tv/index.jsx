@@ -6,7 +6,7 @@ import TVCards from "../../components/TVCards";
 import Header from "../../components/Header";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

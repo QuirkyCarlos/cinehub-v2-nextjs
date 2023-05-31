@@ -5,7 +5,7 @@ import { FaPlay } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

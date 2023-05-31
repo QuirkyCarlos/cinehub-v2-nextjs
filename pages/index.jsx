@@ -7,7 +7,7 @@ import LatestMovies from '../components/LatestMovies'
 import LatestTV from '../components/LatestTV'
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

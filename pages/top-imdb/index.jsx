@@ -7,7 +7,7 @@ import TVCards from "../../components/TVCards";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

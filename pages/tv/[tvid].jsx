@@ -10,7 +10,7 @@ import Header from "../../components/Header";
 import Link from "next/link";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

@@ -5,7 +5,7 @@ import MovieSearchCard from "../../components/Search/MovieSearchCard";
 import TVSearchCard from "../../components/Search/TVSearchCard";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 export async function getServerSideProps(context) {

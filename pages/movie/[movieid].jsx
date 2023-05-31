@@ -11,7 +11,7 @@ import Header from "../../components/Header";
 import Link from "next/link";
 
 export const config = {
-	runtime: 'edge',
+	runtime: 'experimental-edge',
 };
 
 const Player = dynamic(() => import("../../components/Player"), {
