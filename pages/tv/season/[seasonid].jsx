@@ -4,10 +4,6 @@ import Header from "../../../components/Header";
 import { FaPlay } from "react-icons/fa";
 import { useRouter } from "next/router";
 
-export const config = {
-	runtime: 'experimental-edge',
-};
-
 export async function getServerSideProps(context) {
   let { id, sl } = context.query;
   let { seasonid } = context.params;

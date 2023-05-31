@@ -9,10 +9,6 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import Link from "next/link";
 
-export const config = {
-	runtime: 'experimental-edge',
-};
-
 export async function getServerSideProps(context) {
   let { tvid } = context.params
   const req = await fetch(`https://api.themoviedb.org/3/tv/${tvid}?api_key=4c1c4651b470f738873f80310325d848&language=en-US&append_to_response=credits,recommendations,episode_groups`)

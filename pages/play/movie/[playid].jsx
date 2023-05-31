@@ -2,10 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import Header from "../../../components/Header";
 
-export const config = {
-	runtime: 'experimental-edge',
-};
-
 export async function getServerSideProps(context) {
   let { playid } = context.params;
   return {

@@ -6,10 +6,6 @@ import Link from "next/link";
 import MovieCards from "../../components/MovieCards";
 import Header from "../../components/Header";
 
-export const config = {
-	runtime: 'experimental-edge',
-};
-
 export async function getServerSideProps(context) {
   const req = await fetch(`
   https://api.themoviedb.org/3/movie/popular?api_key=4c1c4651b470f738873f80310325d848&language=en-US&page=1`);
