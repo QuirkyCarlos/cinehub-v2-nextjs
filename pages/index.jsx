@@ -6,6 +6,10 @@ import Trending from '../components/Trending'
 import LatestMovies from '../components/LatestMovies'
 import LatestTV from '../components/LatestTV'
 
+export const config = {
+	runtime: 'edge',
+};
+
 export async function getServerSideProps(context) {
   const [trending, latestMovies, latestTV] = await Promise.all([
     (await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=4c1c4651b470f738873f80310325d848')).json(),

@@ -6,6 +6,10 @@ import TVCards from "../../components/TVCards";
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
+export const config = {
+	runtime: 'edge',
+};
+
 export async function getServerSideProps(context) {
   const [movieTop, tvTop] = await Promise.all([
     (await fetch('https://cinehub-v2-backend.vercel.app/api/movies/top-imdb?page=')).json(),

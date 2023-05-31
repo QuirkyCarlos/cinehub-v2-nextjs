@@ -1,36 +1,45 @@
 import React from "react";
+import { META } from "@consumet/extensions";
 import { Icon } from "@chakra-ui/icons";
 import { AiFillStar } from "react-icons/ai";
 import { FaPlay } from "react-icons/fa";
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import dynamic from "next/dynamic";
 import MovieCards from "../../components/MovieCards";
 
 import Header from "../../components/Header";
 import Link from "next/link";
 
+export const config = {
+	runtime: 'edge',
+};
+
 const Player = dynamic(() => import("../../components/Player"), {
   ssr: false,
 });
+
+const TMDB = new META.TMDB();
 
 export async function getServerSideProps(context) {
   let { movieid } = context.params;
   let epid_split = movieid.split("-");
   let epid = epid_split[epid_split.length - 1];
-  const [data, streamData] = await Promise.all([
-    (
-      await fetch(
-        `https://api.themoviedb.org/3/movie/${movieid}?api_key=4c1c4651b470f738873f80310325d848&language=en-US&append_to_response=credits,recommendations`
-      )
-    ).json(),
-    (
-      await fetch(
-        `https://cinehub-v2-backend.vercel.app/api/watch?id=movie/${movieid}&epid=${epid}`
-      )
-    ).json(),
-  ]);
+
+  let movieTMDB = await TMDB.fetchMediaInfo(movieid, 'movie');
+  movieTMDB = JSON.stringify(movieTMDB)
+
+  let movie_tmdb_id = JSON.parse(movieTMDB).id
+  console.log(movie_tmdb_id)
+  // let streamTMDB = await TMDB.fetchEpisodeSources(movie_tmdb_id)
+
+  // streamTMDB = JSON.stringify(streamTMDB)
+  // console.log(streamTMDB)
+  const request = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieid}?api_key=4c1c4651b470f738873f80310325d848&language=en-US&append_to_response=credits,recommendations`
+  );
+  const response = await request.json();
   return {
-    props: { data: data, movieid, streamData }, // will be passed to the page component as props
+    props: { data: response, movieid }, // will be passed to the page component as props
   };
 }
 
@@ -56,7 +65,10 @@ function movieidPage({ data, movieid, streamData }) {
               {data.genres.map((item, index) => {
                 return (
                   <Link href={"/"}>
-                    <div key={index} className="p-2 text-white text-xs bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md">
+                    <div
+                      key={index}
+                      className="p-2 text-white text-xs bg-[#282C37] hover:bg-lime-500 hover:text-black rounded-md"
+                    >
                       {item.name}
                     </div>
                   </Link>
@@ -87,7 +99,7 @@ function movieidPage({ data, movieid, streamData }) {
         <div className="mx-10 mt-8">
           <h1 className="text-3xl text-white">Cast</h1>
           <div className="flex flex-wrap space-x-4 mt-6">
-             {data.credits.cast
+            {data.credits.cast
               .filter((item, idx) => idx < 6)
               .map((item, index) => {
                 return (
@@ -102,7 +114,7 @@ function movieidPage({ data, movieid, streamData }) {
                       {item.name}
                     </p>
                   </div>
-                  )
+                );
               })}
           </div>
         </div>
