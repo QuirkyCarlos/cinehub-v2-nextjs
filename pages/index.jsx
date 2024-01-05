@@ -19,6 +19,8 @@ export async function getServerSideProps() {
       }
   }
 }
+  }
+}
 
 function Home({ trendingData, latestMoviesData, latestTVData }) {
   return (
