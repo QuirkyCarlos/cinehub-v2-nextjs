@@ -6,14 +6,19 @@ import Trending from '../components/Trending'
 import LatestMovies from '../components/LatestMovies'
 import LatestTV from '../components/LatestTV'
 
-export async function getServerSideProps(context) {
-  const [trending, latestMovies, latestTV] = await Promise.all([
-    (await fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=e36b84050065650466f82c5daa172d68')).json(),
-    (await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=e36b84050065650466f82c5daa172d68&language=en-US&page=1')).json(),
-    (await fetch('https://api.themoviedb.org/3/trending/tv/day?api_key=e36b84050065650466f82c5daa172d68')).json()
-  ])
-  return {
-    props: { trendingData: trending.results, latestMoviesData: latestMovies.results, latestTVData: latestTV.results }, // will be passed to the page component as props
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const apiKey = process.env.API_KEY
+  const res = await fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+  )
+  const data = await res.json()
+  if (res.ok) {
+      return {
+          props: { popularMovies: data.results }
+      }
+  }
+}
   }
 }
 
